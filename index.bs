@@ -508,7 +508,8 @@ EventData = (
   InputEvent //
   LogEvent //
   NetworkEvent //
-  ScriptEvent
+  ScriptEvent //
+  SpeculationEvent
 )
 </pre>
 
@@ -13444,3 +13445,34 @@ The following external specifications define additional WebDriver BiDi modules:
 1. <a href="https://www.w3.org/TR/permissions/">Permissions</a>
 
 1. <a href="https://webbluetoothcg.github.io/web-bluetooth/">Web Bluetooth</a>
+
+{^local end definition^}
+
+<pre class="cddl" data-cddl-module="local-cddl">
+speculation.PreloadingStatus = "pending" / "ready" / "success" / "failure"
+</pre>
+
+<pre class="cddl" data-cddl-module="local-cddl">
+SpeculationEvent = (
+   speculation.PrefetchStatusUpdated
+)
+
+speculation.PrefetchStatusUpdatedParameters = {
+   context: text,  
+   url: text,
+   status: speculation.PreloadingStatus
+}
+
+</pre>
+
+<dl>
+   <dt>Event Type</dt>
+   <dd>
+      <pre class="cddl" data-cddl-module="local-cddl">
+        speculation.PrefetchStatusUpdated = (
+         method: "speculation.prefetchStatusUpdated",
+         params: speculation.PrefetchStatusUpdatedParameters
+        )
+      </pre>
+   </dd>
+</dl>
